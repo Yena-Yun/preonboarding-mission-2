@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   line-height: 1.4;
   color: #444;
   background: #fff;
@@ -62,38 +62,34 @@ body {
   border: none;
 }
 
-.btn-plus {
+.btn-search {
   color: darkcyan;
   font-size: 20px;
 }
 
-.btn-trash {
-  color: orangered;
-  font-size: 16px;
+.search-container {
+  height: 164px;
+  padding: 9px 5px 9px 5px;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.05),
+    0px 2px 4px rgba(50, 50, 50, 0.1);
 }
 
-.btn-plus:hover,
-.btn-trash:hover {
-  opacity: 0.5;
+.search-list {
+  height: 100%;
+  overflow-y: auto;
 }
 
-.active-link {
-  color: orangered;
-  text-decoration: underline;
+.search-list::-webkit-scrollbar {
+  width: 4px;
 }
 
-.main__content {
-  flex: 7;
-}
-
-.main__content h1 {
-  margin-bottom: 15px;
-  line-height: 30px;
-  font-size: 30px;
-}
-
-.main__content p {
-  line-height: 25px;
+.search-list::-webkit-scrollbar-thumb {
+  height: 72px;
+  background: rgba(0, 0, 0, 0.48);
+  border-radius: 2px;
 }
 
 .empty-list {
@@ -112,7 +108,9 @@ body {
   border-bottom: 1px solid #eaeaea;
   font-size: 1.2rem;
   letter-spacing: 1.5px;
+  cursor: pointer;
 }
+
 .item:hover {
   opacity: 0.85;
   background-color: #eaeaea;
