@@ -16,4 +16,4 @@ yarn-error.log*
 package-lock*
 *lock*
 
-.env
+.env.example
