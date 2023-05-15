@@ -1,4 +1,3 @@
-import { SearchList } from '../components/SearchList';
 import { InputSearch } from 'components/InputSearch';
 
 const Main = () => {
@@ -6,7 +5,6 @@ const Main = () => {
     <div className='container'>
       <div className='inner'>
         <InputSearch />
-        <SearchList />
       </div>
     </div>
   );
