@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import useDebounce from 'hooks/useDebounce';
 import { SearchData } from 'types/searchType';
-import { FaSearch, FaSpinner } from 'react-icons/fa';
+import { FaSearch, FaSpinner, FaEllipsisH } from 'react-icons/fa';
 
 export const InputSearch = () => {
   const [inputText, setInputText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchData>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
 
-  const result = useDebounce(inputText, 500);
+  const { debouncedResult, isLoading } = useDebounce(inputText, 500);
 
   useEffect(() => {
-    if (result) {
-      setSearchResult(result);
+    if (debouncedResult) {
+      setSearchResult(debouncedResult);
     }
-  }, [result]);
-
-  const handleSubmit = () => {};
+  }, [debouncedResult]);
 
   return (
     <>
-      <form className='form-container' onSubmit={handleSubmit}>
+      <div className='form-container'>
+        <FaSearch className='btn-search' />
         <input
           className='input-text'
           placeholder='Search...'
@@ -32,14 +30,7 @@ export const InputSearch = () => {
           onChange={handleChange}
           disabled={isLoading}
         />
-        {!isLoading ? (
-          <button className='input-submit' type='submit'>
-            <FaSearch className='btn-search' />
-          </button>
-        ) : (
-          <FaSpinner className='spinner' />
-        )}
-      </form>
+      </div>
       <div className='search-container'>
         <ul className='search-list'>
           {searchResult?.result.map((resultItem, id) => (
@@ -48,6 +39,15 @@ export const InputSearch = () => {
             </li>
           ))}
         </ul>
+        <div className='spinner-container'>
+          {!isLoading ? (
+            <button className='input-submit' type='submit'>
+              <FaEllipsisH className='ellipsis' />
+            </button>
+          ) : (
+            <FaSpinner className='spinner' />
+          )}
+        </div>
       </div>
     </>
   );

@@ -3,14 +3,17 @@ import { useEffect, useState } from 'react';
 import { SearchData } from 'types/searchType';
 
 const useDebounce = (keyword: string, delay: number) => {
-  const [debouncedValue, setDebouncedValue] = useState<SearchData>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [debouncedResult, setDebouncedResult] = useState<SearchData>();
 
   useEffect(() => {
     const timer = setTimeout(async () => {
       if (keyword) {
+        setIsLoading(true);
         const result = await getSearchData({ keyword });
 
-        setDebouncedValue(result);
+        setIsLoading(false);
+        setDebouncedResult(result);
       }
     }, delay);
 
@@ -19,7 +22,7 @@ const useDebounce = (keyword: string, delay: number) => {
     };
   }, [keyword, delay]);
 
-  return debouncedValue;
+  return { debouncedResult, isLoading };
 };
 
 export default useDebounce;

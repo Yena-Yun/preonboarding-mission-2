@@ -39,11 +39,11 @@ body {
 }
 
 .input-text {
-  font-size: 1rem;
-  font-weight: 400;
   width: 85%;
   padding-right: 5px;
   padding-left: 10px;
+  font-size: 1rem;
+  font-weight: 400;
   border-radius: calc(0.5 * 100px);
   background-color: transparent;
 }
@@ -63,12 +63,13 @@ body {
 }
 
 .btn-search {
+  margin-top: 12px;
   color: darkcyan;
   font-size: 20px;
 }
 
 .search-container {
-  height: 264px;
+  height: 314px;
   padding: 9px 5px 9px 5px;
   background: #ffffff;
   border: 1px solid #dedede;
@@ -78,7 +79,7 @@ body {
 }
 
 .search-list {
-  height: 100%;
+  height: 264px;
   overflow-y: auto;
 }
 
@@ -126,11 +127,23 @@ body {
   cursor: pointer;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ellipsis {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  color: #9f9f9f;
+}
+
 .spinner {
+  margin: 10px 0;
   font-size: 20px;
   animation: spin 2s linear infinite;
-  display: flex;
-  align-self: center;
 }
 
 @keyframes spin {
