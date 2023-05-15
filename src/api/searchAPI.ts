@@ -1,21 +1,17 @@
 import apiRequest from 'api/index';
 
 type SearchParam = {
-  keyword: string;
+  inputText: string;
   page?: number;
   limit?: number;
 };
 
 const RESOURCE = '/search';
 
-const getSearchData = async ({
-  keyword,
-  page = 1,
-  limit = 10,
-}: SearchParam) => {
+const getSearchData = async ({ inputText, page, limit = 10 }: SearchParam) => {
   try {
     const response = await apiRequest.get(
-      `${RESOURCE}?q=${keyword}&page=${page}&limit=${limit}`
+      `${RESOURCE}?q=${inputText}&page=${page}&limit=${limit}`
     );
 
     return response;

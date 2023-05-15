@@ -1,21 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useDebounce from 'hooks/useDebounce';
-import { SearchData } from 'types/searchType';
 import { FaSearch, FaSpinner, FaEllipsisH } from 'react-icons/fa';
 
 export const InputSearch = () => {
   const [inputText, setInputText] = useState('');
-  const [searchResult, setSearchResult] = useState<SearchData>();
+  const [searchResult, setSearchResult] = useState<string[]>([]);
+
+  const observerRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(1);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
 
-  const { debouncedResult, isLoading } = useDebounce(inputText, 500);
+  useEffect(() => {
+    if (!observerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((prev) => prev + 1);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    observer.observe(observerRef.current);
+  }, [observerRef]);
+
+  const { debouncedResult, isLoading } = useDebounce({
+    inputText,
+    delay: 500,
+    page,
+  });
 
   useEffect(() => {
     if (debouncedResult) {
-      setSearchResult(debouncedResult);
+      setSearchResult((prev) => [...prev, ...debouncedResult]);
     }
   }, [debouncedResult]);
 
@@ -45,7 +66,7 @@ export const InputSearch = () => {
       {searchResult && (
         <div className='search-container'>
           <ul className='search-list'>
-            {searchResult?.result.map((resultItem, id) => (
+            {searchResult?.map((resultItem, id) => (
               <li
                 key={id}
                 id={id.toString()}
@@ -55,6 +76,7 @@ export const InputSearch = () => {
                 {resultItem}
               </li>
             ))}
+            <div ref={observerRef}></div>
           </ul>
           <div className='spinner-container'>
             {!isLoading ? (
