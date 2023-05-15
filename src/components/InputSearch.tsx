@@ -19,6 +19,17 @@ export const InputSearch = () => {
     }
   }, [debouncedResult]);
 
+  const handleOnSelectItem = (
+    e: React.MouseEvent<HTMLLIElement>,
+    id: number
+  ) => {
+    if (e.currentTarget.id === id.toString()) {
+      if (e.currentTarget.textContent) {
+        setInputText(e.currentTarget.textContent);
+      }
+    }
+  };
+
   return (
     <>
       <div className='form-container'>
@@ -31,24 +42,31 @@ export const InputSearch = () => {
           disabled={isLoading}
         />
       </div>
-      <div className='search-container'>
-        <ul className='search-list'>
-          {searchResult?.result.map((resultItem, id) => (
-            <li key={id} className='item'>
-              {resultItem}
-            </li>
-          ))}
-        </ul>
-        <div className='spinner-container'>
-          {!isLoading ? (
-            <button className='input-submit' type='submit'>
-              <FaEllipsisH className='ellipsis' />
-            </button>
-          ) : (
-            <FaSpinner className='spinner' />
-          )}
+      {searchResult && (
+        <div className='search-container'>
+          <ul className='search-list'>
+            {searchResult?.result.map((resultItem, id) => (
+              <li
+                key={id}
+                id={id.toString()}
+                className='item'
+                onClick={(e) => handleOnSelectItem(e, id)}
+              >
+                {resultItem}
+              </li>
+            ))}
+          </ul>
+          <div className='spinner-container'>
+            {!isLoading ? (
+              <button className='input-submit' type='submit'>
+                <FaEllipsisH className='ellipsis' />
+              </button>
+            ) : (
+              <FaSpinner className='spinner' />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
