@@ -7,13 +7,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.26.1",
+    "jest-environment-jsdom": "^29.5.0",
     "react": "^18.0.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
     "react-scripts": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,6 +37,7 @@
     "@types/node": "^20.1.4",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   }
 }
