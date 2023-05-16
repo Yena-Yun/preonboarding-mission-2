@@ -4,6 +4,7 @@ import { FaSearch, FaSpinner, FaEllipsisH } from 'react-icons/fa';
 
 export const InputSearch = () => {
   const [inputText, setInputText] = useState('');
+  const [coloredInputText, setColoredInputText] = useState('');
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const [isInputFocus, setIsInputFocus] = useState(false);
   const [clickedItemIndex, setClickedItemIndex] = useState('');
@@ -12,6 +13,7 @@ export const InputSearch = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
+    setColoredInputText(e.target.value);
   };
 
   const { debouncedResult, isLoading } = useDebounce({
@@ -57,6 +59,7 @@ export const InputSearch = () => {
       removeClickedBorder();
     }
   }, [isLoading, searchResult.length]);
+
   return (
     <>
       <form
@@ -86,7 +89,9 @@ export const InputSearch = () => {
                 }`}
                 onClick={(e) => handleOnSelectItem(e, id)}
               >
-                {resultItem}
+                {resultItem.split(coloredInputText)[0]}
+                <span style={{ color: '#2bc9ba' }}>{coloredInputText}</span>
+                {resultItem.split(coloredInputText)[1]}
               </li>
             ))}
             <div ref={observerRef}></div>
