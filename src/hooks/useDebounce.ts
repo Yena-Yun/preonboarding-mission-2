@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 type Debounce = {
   inputText: string;
   delay: number;
-  // page: number;
   observerRef: React.RefObject<HTMLDivElement>;
 };
 
@@ -30,7 +29,7 @@ const useDebounce = ({ inputText, delay, observerRef }: Debounce) => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (inputText) {
+      if (inputText && !debouncedResult.length) {
         setIsLoading(true);
 
         const result = await getSearchData({ inputText, page });
