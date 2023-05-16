@@ -5,7 +5,8 @@ import { FaSearch, FaSpinner, FaEllipsisH } from 'react-icons/fa';
 export const InputSearch = () => {
   const [inputText, setInputText] = useState('');
   const [searchResult, setSearchResult] = useState<string[]>([]);
-  const [clicked, setClicked] = useState(false);
+  const [isInputFocus, setIsInputFocus] = useState(false);
+  const [clickedItemIndex, setClickedItemIndex] = useState('');
 
   const observerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(1);
@@ -45,19 +46,22 @@ export const InputSearch = () => {
     e: React.MouseEvent<HTMLLIElement>,
     id: number
   ) => {
-    if (e.currentTarget.id === id.toString()) {
+    const stringId = id.toString();
+
+    if (e.currentTarget.id === stringId) {
       if (e.currentTarget.textContent) {
         setInputText(e.currentTarget.textContent);
+        setClickedItemIndex(stringId);
       }
     }
   };
 
   const showClickedBorder = () => {
-    setClicked(true);
+    setIsInputFocus(true);
   };
 
   const removeClickedBorder = () => {
-    setClicked(false);
+    setIsInputFocus(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,7 +77,7 @@ export const InputSearch = () => {
     <>
       <form
         onSubmit={handleSubmit}
-        className={`input-container ${clicked && 'clicked'}`}
+        className={`input-container ${isInputFocus && 'clicked'}`}
       >
         <FaSearch className='icon-search' />
         <input
@@ -93,7 +97,9 @@ export const InputSearch = () => {
               <li
                 key={id}
                 id={id.toString()}
-                className='search-item'
+                className={`search-item ${
+                  clickedItemIndex === id.toString() && 'selected'
+                }`}
                 onClick={(e) => handleOnSelectItem(e, id)}
               >
                 {resultItem}

@@ -118,6 +118,10 @@ body {
   background-color: #eaeaea;
 }
 
+.search-item.selected {
+  background-color: #d5f4f1;
+}
+
 .spinner-container {
   display: flex;
   justify-content: center;
