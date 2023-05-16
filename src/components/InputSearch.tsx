@@ -23,6 +23,10 @@ export const InputSearch = () => {
   });
 
   useEffect(() => {
+    setSearchResult([]);
+  }, [inputText]);
+
+  useEffect(() => {
     if (debouncedResult) {
       setSearchResult((prev) => [...prev, ...debouncedResult]);
     }
