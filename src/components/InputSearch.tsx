@@ -9,31 +9,15 @@ export const InputSearch = () => {
   const [clickedItemIndex, setClickedItemIndex] = useState('');
 
   const observerRef = useRef<HTMLDivElement>(null);
-  const [page, setPage] = useState(1);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
 
-  useEffect(() => {
-    if (!observerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prev) => prev + 1);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    observer.observe(observerRef.current);
-  }, [observerRef]);
-
   const { debouncedResult, isLoading } = useDebounce({
     inputText,
     delay: 500,
-    page,
+    observerRef,
   });
 
   useEffect(() => {
