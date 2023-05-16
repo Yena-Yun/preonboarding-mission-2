@@ -29,7 +29,7 @@ const useDebounce = ({ inputText, delay, observerRef }: Debounce) => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (inputText && !debouncedResult.length) {
+      if (inputText) {
         setIsLoading(true);
 
         const result = await getSearchData({ inputText, page });
