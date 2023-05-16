@@ -5,6 +5,7 @@ import { FaSearch, FaSpinner, FaEllipsisH } from 'react-icons/fa';
 export const InputSearch = () => {
   const [inputText, setInputText] = useState('');
   const [searchResult, setSearchResult] = useState<string[]>([]);
+  const [clicked, setClicked] = useState(false);
 
   const observerRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(1);
@@ -51,18 +52,40 @@ export const InputSearch = () => {
     }
   };
 
+  const showClickedBorder = () => {
+    setClicked(true);
+  };
+
+  const removeClickedBorder = () => {
+    setClicked(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    if (!isLoading && searchResult.length > 0) {
+      removeClickedBorder();
+    }
+  }, [isLoading, searchResult.length]);
   return (
     <>
-      <div className='form-container'>
-        <FaSearch className='btn-search' />
+      <form
+        onSubmit={handleSubmit}
+        className={`input-container ${clicked && 'clicked'}`}
+      >
+        <FaSearch className='icon-search' />
         <input
           className='input-text'
           placeholder='Search...'
           value={inputText}
           onChange={handleChange}
           disabled={isLoading}
+          onFocus={showClickedBorder}
+          onBlur={removeClickedBorder}
         />
-      </div>
+      </form>
       {searchResult && (
         <div className='search-container'>
           <ul className='search-list'>
@@ -70,7 +93,7 @@ export const InputSearch = () => {
               <li
                 key={id}
                 id={id.toString()}
-                className='item'
+                className='search-item'
                 onClick={(e) => handleOnSelectItem(e, id)}
               >
                 {resultItem}
@@ -80,11 +103,9 @@ export const InputSearch = () => {
           </ul>
           <div className='spinner-container'>
             {!isLoading ? (
-              <button className='input-submit' type='submit'>
-                <FaEllipsisH className='ellipsis' />
-              </button>
+              <FaEllipsisH className='icon-ellipsis' />
             ) : (
-              <FaSpinner className='spinner' />
+              <FaSpinner className='icon-spinner' />
             )}
           </div>
         </div>
