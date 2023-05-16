@@ -18,7 +18,6 @@ export const InputSearch = () => {
 
   const { debouncedResult, isLoading } = useDebounce({
     inputText,
-    delay: 500,
     observerRef,
   });
 
@@ -101,11 +100,10 @@ export const InputSearch = () => {
             <div ref={observerRef}></div>
           </ul>
           <div className='spinner-container'>
-            {!isLoading ? (
+            {searchResult.length >= 3 && (
               <FaEllipsisH className='icon-ellipsis' />
-            ) : (
-              <FaSpinner className='icon-spinner' />
             )}
+            {isLoading && <FaSpinner className='icon-spinner' />}
           </div>
         </div>
       )}

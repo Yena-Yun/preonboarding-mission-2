@@ -3,11 +3,10 @@ import { useEffect, useState } from 'react';
 
 type Debounce = {
   inputText: string;
-  delay: number;
   observerRef: React.RefObject<HTMLDivElement>;
 };
 
-const useDebounce = ({ inputText, delay, observerRef }: Debounce) => {
+const useDebounce = ({ inputText, observerRef }: Debounce) => {
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedResult, setDebouncedResult] = useState<string[]>([]);
   const [page, setPage] = useState(0);
@@ -38,12 +37,12 @@ const useDebounce = ({ inputText, delay, observerRef }: Debounce) => {
         setIsLoading(false);
         setDebouncedResult(result.result);
       }
-    }, delay);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [inputText, delay, page]);
+  }, [inputText, page]);
 
   return { debouncedResult, isLoading };
 };
