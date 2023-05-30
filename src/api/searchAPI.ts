@@ -1,4 +1,5 @@
 import apiRequest from 'api/index';
+import { SearchData } from 'types/searchType';
 
 type SearchParam = {
   inputText: string;
@@ -8,7 +9,11 @@ type SearchParam = {
 
 const RESOURCE = '/search';
 
-const getSearchData = async ({ inputText, page, limit = 10 }: SearchParam) => {
+const getSearchData = async ({
+  inputText,
+  page,
+  limit = 10,
+}: SearchParam): Promise<SearchData> => {
   try {
     const response = await apiRequest.get(
       `${RESOURCE}?q=${inputText}&page=${page}&limit=${limit}`
