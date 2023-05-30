@@ -9,7 +9,7 @@ type Debounce = {
 const useDebounce = ({ inputText, observerRef }: Debounce) => {
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedResult, setDebouncedResult] = useState<string[]>([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (!observerRef.current) return;
@@ -28,11 +28,10 @@ const useDebounce = ({ inputText, observerRef }: Debounce) => {
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (inputText) {
+      if (inputText.length > 1) {
         setIsLoading(true);
 
         const result = await getSearchData({ inputText, page });
-        console.log(result);
 
         setIsLoading(false);
         setDebouncedResult(result.result);
