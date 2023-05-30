@@ -79,6 +79,13 @@ body {
     0px 2px 4px rgba(50, 50, 50, 0.1);
 }
 
+.no-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .search-list {
   height: 234px;
   overflow-y: auto;

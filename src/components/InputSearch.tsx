@@ -80,23 +80,27 @@ export const InputSearch = () => {
           onBlur={removeClickedBorder}
         />
       </form>
-      {searchResult && (
+      {inputText.length > 1 && (
         <div className='search-container'>
           <ul className='search-list'>
-            {searchResult?.map((resultItem, id) => (
-              <li
-                key={id}
-                id={id.toString()}
-                className={`search-item ${
-                  clickedItemIndex === id.toString() && 'selected'
-                }`}
-                onClick={(e) => handleOnSelectItem(e, id)}
-              >
-                {resultItem.split(coloredInputText)[0]}
-                <span style={{ color: '#2bc9ba' }}>{coloredInputText}</span>
-                {resultItem.split(coloredInputText)[1]}
-              </li>
-            ))}
+            {debouncedResult.length < 1 && !isLoading ? (
+              <p className='no-result'>검색 결과가 없습니다.</p>
+            ) : (
+              searchResult?.map((resultItem, id) => (
+                <li
+                  key={id}
+                  id={id.toString()}
+                  className={`search-item ${
+                    clickedItemIndex === id.toString() && 'selected'
+                  }`}
+                  onClick={(e) => handleOnSelectItem(e, id)}
+                >
+                  {resultItem.split(coloredInputText)[0]}
+                  <span style={{ color: '#2bc9ba' }}>{coloredInputText}</span>
+                  {resultItem.split(coloredInputText)[1]}
+                </li>
+              ))
+            )}
             <div ref={observerRef}></div>
           </ul>
           <div className='spinner-container'>
