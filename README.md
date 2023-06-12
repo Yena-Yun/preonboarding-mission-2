@@ -1,10 +1,15 @@
 # 📚 Preonboarding 2번째 기업 과제
-자동 완성 검색 바
 
-=> 각 링크를 클릭하시면 관련된 커밋 기록으로 이동합니다. 👩‍💻
+## 💻 실행 방법
+
+1. git clone
+2. yarn 또는 npm i
+3. yarn start 또는 npm run start
 
 
 ## 🔎 작업 내역
+각 링크를 클릭하시면 관련된 커밋 기록으로 이동합니다. 👩‍💻
+
 * 기존 코드에 **타입스크립트 적용**
    * [devDependency에 타입스크립트 관련 설정 추가](https://github.com/Yena-Yun/preonboarding-mission-2/blob/main/package.json)🔗
    * [baseInstance(axios 인스턴스)에 타입 지정](https://github.com/Yena-Yun/preonboarding-mission-2/commit/a61c0176537d9bf697c45a41022aaa7e54763535)🔗
@@ -28,11 +33,4 @@
 
 * Figma 디자인 화면을 활용하여 구현 🎨
 
-## 💻 실행 방법
-
-클론 -> 디펜던시와 패키지 설치 -> 앱 실행
-
-```bash
-git clone -> npm i OR yarn -> npm run start OR yarn start
-```
 
