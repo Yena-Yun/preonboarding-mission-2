@@ -1,5 +1,7 @@
 # 📚 Preonboarding 2번째 기업 과제
 
+** 기존 프로젝트르 갖고 작업하여 Contributor는 여러 명이지만 개인이 작업한 결과물입니다.
+
 ## 🧪 실행 방법
 
 1. git clone
